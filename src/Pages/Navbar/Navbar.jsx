@@ -89,12 +89,16 @@ const Navbar = () => {
           </Link>
           <div className="flex md:order-2">
             <div className="flex gap-5">
-              <button className="px-6 py-3 bg-[#ed1e3d] text-white font-bold rounded-lg">
-                Log in
-              </button>
-              <button className="px-6 py-3 bg-[#ed1e3d] text-white font-bold rounded-lg">
-                Registration
-              </button>
+              <Link to="/login">
+                <button className="px-6 py-3 bg-[#e93f58] text-white font-bold rounded-lg">
+                  Log in
+                </button>
+              </Link>
+              <Link to="/registration">
+                <button className="px-6 py-3 bg-[#e93f58] text-white font-bold rounded-lg">
+                  Registration
+                </button>
+              </Link>
             </div>
             {/* responsive */}
             <button
