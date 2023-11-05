@@ -3,11 +3,13 @@ import { initFlowbite } from "flowbite";
 import logo from "../../assets/icons/logo2.png";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import profileImg from "../../assets/images/user.png";
 const Navbar = () => {
   useEffect(() => {
     initFlowbite();
   }, []);
-  const { user } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
+
   const links = (
     <>
       <li>
@@ -20,58 +22,62 @@ const Navbar = () => {
       </li>
       {/* dropdown */}
 
-      <li>
-        <button
-          id="dropdownNavbarLink"
-          data-dropdown-toggle="dropdownNavbar"
-          className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#ed2845] md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-          Dashboard{" "}
-          <svg
-            className="w-2.5 h-2.5 ml-2.5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 10 6">
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="m1 1 4 4 4-4"
-            />
-          </svg>
-        </button>
-        {/* Dropdown menu */}
-        <div
-          id="dropdownNavbar"
-          className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-          <ul
-            className="py-2 text-sm text-gray-700 dark:text-gray-400"
-            aria-labelledby="dropdownLargeButton">
-            <li>
-              <Link
-                to="/myServices"
-                className="block px-4 py-2 hover:bg-gray-100 hover:text-[#ed2845] text-bold dark:hover:bg-gray-600 dark:hover:text-white">
-                My Services
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/addServices"
-                className="block px-4 py-2  hover:text-[#ed2845] text-bold  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Add Services
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/mySchedules"
-                className="block px-4 py-2  hover:text-[#ed2845] text-bold  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                My Schedules
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </li>
+      {user ? (
+        <li>
+          <button
+            id="dropdownNavbarLink"
+            data-dropdown-toggle="dropdownNavbar"
+            className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#ed2845] md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+            Dashboard{" "}
+            <svg
+              className="w-2.5 h-2.5 ml-2.5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6">
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </button>
+          {/* Dropdown menu */}
+          <div
+            id="dropdownNavbar"
+            className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+            <ul
+              className="py-2 text-sm text-gray-700 dark:text-gray-400"
+              aria-labelledby="dropdownLargeButton">
+              <li>
+                <Link
+                  to="/myServices"
+                  className="block px-4 py-2 hover:bg-gray-100 hover:text-[#ed2845] text-bold dark:hover:bg-gray-600 dark:hover:text-white">
+                  My Services
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/addServices"
+                  className="block px-4 py-2  hover:text-[#ed2845] text-bold  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  Add Services
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/mySchedules"
+                  className="block px-4 py-2  hover:text-[#ed2845] text-bold  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  My Schedules
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </li>
+      ) : (
+        ""
+      )}
 
       <li>
         <Link
@@ -82,10 +88,14 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const handleLogOut = () => {
+    logOutUser().then().catch();
+  };
   return (
     <div>
-      <nav className="bg dark:bg-gray-900  w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <nav className=" dark:bg-gray-900  w-full  left-0 border-b border-gray-200 dark:border-gray-600">
+        <div className="max-w-screen-xl h-28 pb-10 flex flex-wrap items-center justify-between mx-auto p-4">
           <Link to="/" className="flex items-center">
             <img src={logo} className=" w-28 mr-3" alt=" Logo" />
           </Link>
@@ -94,7 +104,7 @@ const Navbar = () => {
             <div className="flex items-center gap-5">
               {/* profile */}
               {user ? (
-                <div>
+                <div className="pr-10">
                   <button
                     type="button"
                     className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -105,28 +115,33 @@ const Navbar = () => {
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="w-10 h-10 rounded-full"
-                      src="/docs/images/people/profile-picture-3.jpg"
+                      src={user?.photoURL ? user.photoURL : `${profileImg}`}
                       alt="user photo"
                     />
                   </button>
                   <div
                     className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
                     id="user-dropdown">
-                    <div className="px-4 py-3">
+                    <div className="px-4 py-3 font-bold">
                       <span className="block text-sm text-gray-900 dark:text-white">
-                        Bonnie Green
+                        {user?.displayName}
                       </span>
                       <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                        name@flowbite.com
+                        {user?.email}
                       </span>
                     </div>
-                    <ul className="py-2" aria-labelledby="user-menu-button">
+                    <div className="px-4 py-3 font-bold">
+                      <Link>Visit Profile</Link>
+                    </div>
+                    <ul
+                      className="py-2 font-bold"
+                      aria-labelledby="user-menu-button">
                       <li>
-                        <a
-                          href="#"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                        <Link
+                          onClick={handleLogOut}
+                          className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                           Sign out
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>

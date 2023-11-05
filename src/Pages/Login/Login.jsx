@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/images/login.png";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import googleImg from "../../assets/icons/google.png";
 const Login = () => {
   const [show, setShow] = useState(true);
-  const { loginUser } = useContext(AuthContext);
-  // const [error, setError] = useState("");
+  const { loginUser, googleAuth } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogIn = (e) => {
     e.preventDefault();
@@ -20,11 +22,21 @@ const Login = () => {
     loginUser(email, password)
       .then(() => {
         Swal.fire("Awesome!!", "Login Successful !", "success");
+        navigate("/");
       })
       .catch((error) => {
-        // setError(error.code);
-        console.log(error.code);
+        setError(error.code);
       });
+  };
+
+  const handleGoogleRegister = () => {
+    // register with google
+    googleAuth()
+      .then(() => {
+        Swal.fire("Woohoo!!", "Registration Successful !", "success");
+        navigate("/");
+      })
+      .catch();
   };
   return (
     <div className=" bg-[#160938] py-20 flex h-auto items-center">
@@ -105,9 +117,21 @@ const Login = () => {
                 className="w-full text-white bg-[#e93f58] hover:bg-[#d14157] focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#e93f58] dark:hover:bg-[#e93f58] dark:focus:ring-[#e93f58]">
                 Login account
               </button>
-              {/* <div>
+              <div>
                 {error ? <p className="font-bold text-red-600">{error}</p> : ""}
-              </div> */}
+              </div>
+              {/* google login */}
+              <div>
+                <p className="text-center font-bold">Also Register With</p>
+                <div className="flex mt-4 justify-center">
+                  <img
+                    onClick={handleGoogleRegister}
+                    className="h-10 cursor-pointer"
+                    src={googleImg}
+                    alt=""
+                  />
+                </div>
+              </div>
               <div className="text-sm font-bold text-gray-500 dark:text-gray-300">
                 Not Registered?{" "}
                 <Link

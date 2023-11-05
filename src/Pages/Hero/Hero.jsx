@@ -1,8 +1,8 @@
 import heroImg from "../../assets/images/hero.jpg";
 const Hero = () => {
   return (
-    <div>
-      <div className="md:flex items-center">
+    <div className="max-w-6xl mx-auto">
+      <div className="md:flex items-center pt-10">
         <div className="w-fit">
           <div className="px-10">
             <h1 className="text-5xl font-bold">

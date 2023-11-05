@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import registerImg from "../../assets/images/register.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+
 const Register = () => {
   const [show, setShow] = useState(true);
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -23,12 +25,15 @@ const Register = () => {
     createUser(email, password)
       .then((res) => {
         console.log(res.user);
+        updateUserProfile(name, photo).then().catch();
         Swal.fire("Woohoo!!", "Registration Successful !", "success");
+        navigate("/");
       })
       .catch((error) => {
         setError(error.code);
       });
   };
+
   return (
     <div className=" bg-[#160938] py-10 flex h-auto items-center">
       <div className=" bg-white shadow-xl max-w-5xl px-10 py-10 mx-auto flex items-center gap-4">
@@ -119,6 +124,7 @@ const Register = () => {
               <div>
                 {error ? <p className="font-bold text-red-600">{error}</p> : ""}
               </div>
+
               <div className="text-sm font-bold text-gray-500 dark:text-gray-300">
                 Have an account?{" "}
                 <Link
