@@ -1,43 +1,76 @@
 import { Link } from "react-router-dom";
-import loginImg from "../../assets/images/login.png";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
+import registerImg from "../../assets/images/register.png";
 import { useContext, useState } from "react";
-import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-const Login = () => {
+import Swal from "sweetalert2";
+const Register = () => {
   const [show, setShow] = useState(true);
-  const { loginUser } = useContext(AuthContext);
-  // const [error, setError] = useState("");
+  const { createUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
 
-  const handleLogIn = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
 
     const form = e.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
+    console.log(name, photo);
 
-    // login user
-    loginUser(email, password)
-      .then(() => {
-        Swal.fire("Awesome!!", "Login Successful !", "success");
+    // register user
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        Swal.fire("Woohoo!!", "Registration Successful !", "success");
       })
       .catch((error) => {
-        // setError(error.code);
-        console.log(error.code);
+        setError(error.code);
       });
   };
   return (
-    <div className=" bg-[#160938] py-20 flex h-auto items-center">
+    <div className=" bg-[#160938] py-10 flex h-auto items-center">
       <div className=" bg-white shadow-xl max-w-5xl px-10 py-10 mx-auto flex items-center gap-4">
         <div className="w-full">
-          <img src={loginImg} alt="" />
+          <img src={registerImg} alt="" />
         </div>
         <div className="w-full">
           <div className="w-full max-w-sm p-4 bg-white rounded-lg sm:p-6 md:p-8 ">
-            <form onSubmit={handleLogIn} className="space-y-6" action="#">
+            <form onSubmit={handleRegister} className="space-y-4">
               <h5 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Login in to our platform
+                Register in to our platform
               </h5>
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#e93f58] focus:border-[#e93f58] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white font-bold"
+                  placeholder="Your Name"
+                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="photo"
+                  className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">
+                  Photo URL
+                </label>
+                <input
+                  type="text"
+                  name="photo"
+                  id="photo"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#e93f58] focus:border-[#e93f58] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white font-bold"
+                  placeholder="Photo URL"
+                  required=""
+                />
+              </div>
               <div>
                 <label
                   htmlFor="email"
@@ -77,43 +110,21 @@ const Login = () => {
                   )}
                 </div>
               </div>
-              <div className="flex items-start">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      type="checkbox"
-                      defaultValue=""
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-[#e93f58] dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                      required=""
-                    />
-                  </div>
-                  <label
-                    htmlFor="remember"
-                    className="ml-2 text-sm font-bold text-gray-900 dark:text-gray-300">
-                    Remember me
-                  </label>
-                </div>
-                <a
-                  href="#"
-                  className="ml-auto text-sm text-[#e93f58] hover:underline dark:text-[#e93f58]">
-                  Lost Password?
-                </a>
-              </div>
+
               <button
                 type="submit"
                 className="w-full text-white bg-[#e93f58] hover:bg-[#d14157] focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#e93f58] dark:hover:bg-[#e93f58] dark:focus:ring-[#e93f58]">
-                Login account
+                Register account
               </button>
-              {/* <div>
+              <div>
                 {error ? <p className="font-bold text-red-600">{error}</p> : ""}
-              </div> */}
+              </div>
               <div className="text-sm font-bold text-gray-500 dark:text-gray-300">
-                Not Registered?{" "}
+                Have an account?{" "}
                 <Link
-                  to="/registration"
+                  to="/login"
                   className="text-[#e93f58] hover:underline dark:text-[#e93f58]">
-                  Create account
+                  Login Here
                 </Link>
               </div>
             </form>
@@ -124,4 +135,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

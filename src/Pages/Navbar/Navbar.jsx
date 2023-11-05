@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { initFlowbite } from "flowbite";
 import logo from "../../assets/icons/logo2.png";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 const Navbar = () => {
   useEffect(() => {
     initFlowbite();
   }, []);
-  // console.log(initFlowbite);
+  const { user } = useContext(AuthContext);
   const links = (
     <>
       <li>
@@ -18,6 +19,7 @@ const Navbar = () => {
         </Link>
       </li>
       {/* dropdown */}
+
       <li>
         <button
           id="dropdownNavbarLink"
@@ -87,18 +89,62 @@ const Navbar = () => {
           <Link to="/" className="flex items-center">
             <img src={logo} className=" w-28 mr-3" alt=" Logo" />
           </Link>
+          {/* login and register */}
           <div className="flex md:order-2">
-            <div className="flex gap-5">
-              <Link to="/login">
-                <button className="px-6 py-3 bg-[#e93f58] text-white font-bold rounded-lg">
-                  Log in
-                </button>
-              </Link>
-              <Link to="/registration">
-                <button className="px-6 py-3 bg-[#e93f58] text-white font-bold rounded-lg">
-                  Registration
-                </button>
-              </Link>
+            <div className="flex items-center gap-5">
+              {/* profile */}
+              {user ? (
+                <div>
+                  <button
+                    type="button"
+                    className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    id="user-menu-button"
+                    aria-expanded="false"
+                    data-dropdown-toggle="user-dropdown"
+                    data-dropdown-placement="bottom">
+                    <span className="sr-only">Open user menu</span>
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src="/docs/images/people/profile-picture-3.jpg"
+                      alt="user photo"
+                    />
+                  </button>
+                  <div
+                    className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                    id="user-dropdown">
+                    <div className="px-4 py-3">
+                      <span className="block text-sm text-gray-900 dark:text-white">
+                        Bonnie Green
+                      </span>
+                      <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                        name@flowbite.com
+                      </span>
+                    </div>
+                    <ul className="py-2" aria-labelledby="user-menu-button">
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                          Sign out
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex gap-3">
+                  <Link to="/login">
+                    <button className="px-6 py-3 bg-[#e93f58] text-white font-bold rounded-lg">
+                      Log in
+                    </button>
+                  </Link>
+                  <Link to="/registration">
+                    <button className="px-6 py-3 bg-[#e93f58] text-white font-bold rounded-lg">
+                      Registration
+                    </button>
+                  </Link>
+                </div>
+              )}
             </div>
             {/* responsive */}
             <button
@@ -125,6 +171,7 @@ const Navbar = () => {
               {/* dropdown */}
             </button>
           </div>
+
           <div
             className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
             id="navbar-sticky">

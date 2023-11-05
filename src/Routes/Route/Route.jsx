@@ -3,7 +3,7 @@ import Root from "../../Layout/Root/Root";
 import Home from "../../Pages/Home/Home";
 import Error from "../../Pages/Error/Error";
 import Login from "../../Pages/Login/Login";
-import Register from "../../Register/Register";
+import Register from "../../Pages/Register/Register";
 
 const router = createBrowserRouter([
   {
