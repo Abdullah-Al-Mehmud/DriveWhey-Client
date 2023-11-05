@@ -1,12 +1,51 @@
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-
+import Swal from "sweetalert2";
 import addServiceImg from "../../assets/images/addService.jpg";
+
 const AddService = () => {
   const { user } = useContext(AuthContext);
+
+  const handleAddService = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const photo = form.photo.value;
+    const serviceName = form.serviceName.value;
+    const name = form.name.value;
+    const email = form.email.value;
+    const price = form.price.value;
+    const serviceArea = form.serviceArea.value;
+
+    const service = {
+      photo,
+      serviceName,
+      name,
+      email,
+      price,
+      serviceArea,
+    };
+    console.log(service);
+    // posting data on database
+    fetch("http://localhost:3000/services", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(service),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire("WoooW!!", "Service Added!", "success");
+        }
+      });
+  };
+
   return (
     <div className="max-w-7xl mx-auto">
-      <form className="flex h-2/3 items-center">
+      <form onSubmit={handleAddService} className="flex h-2/3 items-center">
         <div className="w-fit">
           <img className="lg:w-[800px]" src={addServiceImg} alt="" />
         </div>
@@ -55,7 +94,6 @@ const AddService = () => {
                 id="company"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Flowbite"
-                required=""
               />
             </div>
             <div>
@@ -70,9 +108,6 @@ const AddService = () => {
                 name="email"
                 id="phone"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="123-45-678"
-                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                required=""
               />
             </div>
             <div>
@@ -105,9 +140,11 @@ const AddService = () => {
                 required=""
               />
             </div>
-            <div>
-              <button className="bg-red-500">Add Service</button>
-            </div>
+          </div>
+          <div className="  flex justify-center">
+            <button className="bg-[#ee3e58] px-20 py-3 rounded-lg font-bold text-white">
+              Add Service
+            </button>
           </div>
         </div>
       </form>
