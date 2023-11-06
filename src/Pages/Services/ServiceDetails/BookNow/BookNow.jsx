@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../../../AuthProvider/AuthProvider";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 
 const BookNow = ({ serviceDetails }) => {
   const [openModal, setOpenModal] = useState(false);
   const { user } = useContext(AuthContext);
-  const { price, serviceName, photo, serviceArea } = serviceDetails;
+  const { name, price, serviceName, photo, serviceArea } = serviceDetails;
 
   const handleBooking = (e) => {
     e.preventDefault();
@@ -35,10 +36,21 @@ const BookNow = ({ serviceDetails }) => {
     console.log(booking);
 
     // post the booking in backend
-    fetch("")
+    fetch("http://localhost:3000/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (data.insertedId) {
+          Swal.fire("WoooW!!", "Service Purchased!", "success");
+          setOpenModal(false);
+        }
+        form.reset();
       });
   };
 
@@ -93,7 +105,7 @@ const BookNow = ({ serviceDetails }) => {
                   </label>
                   <input
                     type="text"
-                    defaultValue={user?.displayName}
+                    defaultValue={user?.displayName ? user?.displayName : name}
                     name="name"
                     id="company"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

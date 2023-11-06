@@ -34,7 +34,9 @@ const IndividualService = ({ service }) => {
                 img={user?.photoURL}
                 rounded
               />
-              <p className="font-bold ml-5">{name}</p>
+              <p className="font-bold ml-5">
+                {user?.displayName ? user?.displayName : name}
+              </p>
             </div>
             <p className="font-bold">Service Area : {serviceArea}</p>
             <Link to={`/services/${_id}`}>
