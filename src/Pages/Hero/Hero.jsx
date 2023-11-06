@@ -16,7 +16,7 @@ const Hero = () => {
               congestion.Ride-sharing can take place through organized platforms
               and apps such as Uber, Lyft.
             </p>
-            <button className="mt-5 px-6 py-3 bg-[#ed1e3d] text-white font-bold rounded-t-xl rounded-bl-xl md:mb-20">
+            <button className="mt-5 shadow-xl px-6 py-3 bg-[#ed1e3d] text-white font-bold rounded-t-xl rounded-bl-xl md:mb-20">
               Read More
             </button>
           </div>

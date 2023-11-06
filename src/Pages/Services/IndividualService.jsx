@@ -4,12 +4,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 import { Avatar } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 const IndividualService = ({ service }) => {
   const { user } = useContext(AuthContext);
-  const { photo, serviceName, name, price, serviceArea, description } = service;
+  const { _id, photo, serviceName, name, price, serviceArea, description } =
+    service;
   return (
-    <div className="">
+    <div>
       <Card className="w-full " imgSrc={photo} horizontal>
         <div className="flex items-center gap-4">
           {/* <div className="w-full ">
@@ -35,9 +37,11 @@ const IndividualService = ({ service }) => {
               <p className="font-bold ml-5">{name}</p>
             </div>
             <p className="font-bold">Service Area : {serviceArea}</p>
-            <button className="px-6 py-2 bg-[#e93f58] text-white mt-4">
-              View Details
-            </button>
+            <Link to={`/services/${_id}`}>
+              <button className="px-6 shadow-xl py-2 bg-[#e93f58] text-white mt-4">
+                View Details
+              </button>
+            </Link>
           </div>
         </div>
       </Card>
