@@ -8,7 +8,7 @@ const Services = () => {
 
   return (
     <div>
-      <div className="grid md:grid-cols-2 gap-5 px-10 py-20">
+      <div className="grid lg:grid-cols-2 gap-5 px-10 py-20">
         {showMore
           ? allServices.map((service) => (
               <IndividualService

@@ -93,7 +93,7 @@ const Header = () => {
                     Sign out
                   </Dropdown.Item>
                 </Dropdown>
-                <Navbar.Toggle />
+                {/* <Navbar.Toggle /> */}
               </div>
             </Navbar>
           ) : (
