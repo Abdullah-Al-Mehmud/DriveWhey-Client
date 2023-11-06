@@ -56,7 +56,7 @@ const Header = () => {
     logOutUser().then().catch();
   };
   return (
-    <div>
+    <div className="max-w-6xl mx-auto">
       <Navbar fluid rounded>
         <Navbar.Brand>
           <img src={logo} className="w-28 mr-3" />

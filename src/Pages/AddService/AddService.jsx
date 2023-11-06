@@ -16,6 +16,7 @@ const AddService = () => {
     const email = form.email.value;
     const price = form.price.value;
     const serviceArea = form.serviceArea.value;
+    const description = form.description.value;
 
     const service = {
       photo,
@@ -24,6 +25,7 @@ const AddService = () => {
       email,
       price,
       serviceArea,
+      description,
     };
     console.log(service);
     // posting data on database
@@ -40,12 +42,13 @@ const AddService = () => {
         if (data.insertedId) {
           Swal.fire("WoooW!!", "Service Added!", "success");
         }
+        form.reset();
       });
   };
 
   return (
     <div className="max-w-7xl mx-auto">
-      <form onSubmit={handleAddService} className="flex h-2/3 items-center">
+      <form onSubmit={handleAddService} className="md:flex h-2/3 items-center">
         <div className="w-fit">
           <img className="lg:w-[800px]" src={addServiceImg} alt="" />
         </div>
@@ -63,7 +66,7 @@ const AddService = () => {
                 id="first_name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Picture URL"
-                required=""
+                required
               />
             </div>
             <div>
@@ -78,7 +81,7 @@ const AddService = () => {
                 id="last_name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Service Name"
-                required=""
+                required
               />
             </div>
             <div>
@@ -124,7 +127,7 @@ const AddService = () => {
                 name="price"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Price"
-                required=""
+                required
               />
             </div>
             <div>
@@ -139,11 +142,17 @@ const AddService = () => {
                 id="visitors"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Service Area"
-                required=""
+                required
               />
             </div>
           </div>
-          <div className="  flex justify-center">
+          <div className="-mt-10 mb-5 px-10">
+            <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">
+              Description
+            </label>
+            <textarea name="description" required className="w-full h-40" />
+          </div>
+          <div className=" mb-20 flex justify-center">
             <button className="bg-[#ee3e58] px-20 py-3 rounded-lg font-bold text-white">
               Add Service
             </button>
