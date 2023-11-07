@@ -1,7 +1,12 @@
+import axios from "axios";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ModalUpdate = ({ service }) => {
+  const navigate = useNavigate();
   const {
+    _id,
     photo,
     serviceName,
     providerName,
@@ -19,18 +24,26 @@ const ModalUpdate = ({ service }) => {
     const serviceName = form.serviceName.value;
     const price = form.price.value;
     const serviceArea = form.serviceArea.value;
-    const serviceDate = form.serviceDate.value;
-    const receiveArea = form.receiveArea.value;
+    const description = form.description.value;
 
     const update = {
       photo,
       serviceName,
       price,
       serviceArea,
-      serviceDate,
-      receiveArea,
+      description,
     };
     // update data in database
+    axios
+      .put(`http://localhost:3000/services/update/${_id}`, update)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.modifiedCount === 1) {
+          Swal.fire("WoooW!!", "Service Purchased!", "success");
+          navigate("/manageServices");
+        }
+        form.reset();
+      });
   };
   return (
     <div>
@@ -146,7 +159,7 @@ const ModalUpdate = ({ service }) => {
           </div>
           <div className=" mb-20 flex justify-center">
             <button className="bg-[#ee3e58] px-20 py-3 rounded-lg font-bold text-white">
-              Add Service
+              Update Service
             </button>
           </div>
         </div>

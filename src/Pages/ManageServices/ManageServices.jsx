@@ -1,9 +1,20 @@
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import { useLoaderData } from "react-router-dom";
 import ModalUpdate from "./ModalUpdate";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const ManageServices = () => {
-  const services = useLoaderData();
+  const { user } = useContext(AuthContext);
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/services?email=${user?.email}`)
+      .then((res) => {
+        setServices(res.data);
+      });
+  }, [user?.email]);
   return (
     <div className="mb-20">
       <div className="overflow-x-auto">
