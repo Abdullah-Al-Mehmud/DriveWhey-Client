@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import IndividualService from "./IndividualService";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Services = () => {
   const allServices = useLoaderData();
@@ -18,6 +19,9 @@ const Services = () => {
   };
   return (
     <div className="max-w-7xl mx-auto">
+      <Helmet>
+        <title>DriveWhey | Services</title>
+      </Helmet>
       <div>
         <input
           type="text"

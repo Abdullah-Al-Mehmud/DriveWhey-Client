@@ -1,4 +1,5 @@
 import heroImg from "../../assets/images/hero.jpg";
+import { Typewriter } from "react-simple-typewriter";
 const Hero = () => {
   return (
     <div className="max-w-6xl mx-auto">
@@ -6,7 +7,16 @@ const Hero = () => {
         <div className="w-fit">
           <div className="px-10">
             <h1 className="text-5xl font-bold">
-              <span className="text-[#ed1e3d]">Ride</span> Share !!
+              <span className="text-[#ed1e3d]">Explore </span> Our {""}
+              <Typewriter
+                words={["Comfort !!", "Safe Ride !!", "Affordable Price !!"]}
+                loop={0 | false}
+                cursor
+                cursorStyle="_"
+                typeSpeed={50}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
             </h1>
             <p className="mt-4 pr-20 font-bold ">
               Ride-sharing involves individuals sharing a ride in a single

@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import googleImg from "../../assets/icons/google.png";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
   const [show, setShow] = useState(true);
   const { loginUser, googleAuth } = useContext(AuthContext);
@@ -40,6 +41,9 @@ const Login = () => {
   };
   return (
     <div className=" bg-[#160938] py-20 flex h-auto items-center">
+      <Helmet>
+        <title>DriveWhey | Login</title>
+      </Helmet>
       <div className=" bg-white shadow-xl max-w-5xl px-10 py-10 mx-auto flex items-center gap-4">
         <div className="w-full">
           <img src={loginImg} alt="" />

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import addServiceImg from "../../assets/images/addService.jpg";
+import { Helmet } from "react-helmet-async";
 
 const AddService = () => {
   const { user } = useContext(AuthContext);
@@ -54,6 +55,9 @@ const AddService = () => {
   console.log(user);
   return (
     <div className="max-w-7xl mx-auto">
+      <Helmet>
+        <title>DriveWhey | Add Services</title>
+      </Helmet>
       <form onSubmit={handleAddService} className="md:flex h-2/3 items-center">
         <div className="w-fit">
           <img className="lg:w-[800px]" src={addServiceImg} alt="" />

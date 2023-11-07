@@ -1,12 +1,16 @@
 import { useLoaderData } from "react-router-dom";
 import ServiceProvider from "./ServiceProvider";
 import BookNow from "./BookNow/BookNow";
+import { Helmet } from "react-helmet-async";
 
 const ServiceDetails = () => {
   const serviceDetails = useLoaderData();
   const { price, serviceName, photo, description } = serviceDetails;
   return (
     <div className="lg:flex px-10">
+      <Helmet>
+        <title>DriveWhey | Service Details</title>
+      </Helmet>
       <div className="py-10 w-3/4">
         <div className="w-full flex justify-center">
           <img className="lg:w-auto lg:h-96" src={photo} alt="" />
