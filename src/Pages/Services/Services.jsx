@@ -4,42 +4,59 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 const Services = () => {
-  const allServices = useLoaderData();
   const [showMore, setShowMore] = useState(false);
   const [search, setSearch] = useState("");
-  // const [userData, setUserData] = useState([]);
-  // const [filteredData, setFilteredData] = useState("");
+  const [data, setData] = useState([]);
+  const [display, setDisplay] = useState([]);
 
-  const handleFilterData = () => {
-    allServices.filter((item) => {
-      return search.toLowerCase() === ""
-        ? item
-        : item.serviceName.toLowerCase().includes(search);
+  const handleFilterData = (e) => {
+    e.preventDefault();
+
+    const filterData = data.filter((item) => {
+      if (search === "") {
+        return item;
+      } else if (
+        item.serviceName.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return item;
+      }
     });
+    setDisplay(filterData);
   };
+  useEffect(() => {
+    fetch("http://localhost:3000/services")
+      .then((res) => res.json())
+      .then((data) => {
+        setDisplay(data);
+        setData(data);
+      });
+  }, []);
   return (
     <div className="max-w-7xl mx-auto">
       <Helmet>
         <title>DriveWhey | Services</title>
       </Helmet>
-      <div>
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button className="bg-red-500 text-white" onClick={handleFilterData}>
-          Search
-        </button>
+      <div className="flex justify-center">
+        <form onSubmit={handleFilterData}>
+          <input
+            className="w-72 relative rounded-full pl-5 font-bold border-2 border-[#e93f58] focus:border-[#e93f58] outline-none"
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button type="submit" className="bg-red-500 absolute text-white">
+            Search
+          </button>
+        </form>
       </div>
       <div className="grid lg:grid-cols-2 gap-5 px-10 py-20">
         {showMore
-          ? allServices.map((service) => (
+          ? display.map((service) => (
               <IndividualService
                 key={service._id}
                 service={service}></IndividualService>
             ))
-          : allServices
+          : display
               .slice(0, 4)
               .map((service) => (
                 <IndividualService
@@ -47,7 +64,7 @@ const Services = () => {
                   service={service}></IndividualService>
               ))}
       </div>
-      {allServices.length > 4 ? (
+      {display.length > 4 ? (
         <div
           onClick={() => setShowMore(!showMore)}
           className="flex mb-10 justify-center ">

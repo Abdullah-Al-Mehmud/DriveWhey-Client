@@ -4,6 +4,7 @@ import registerImg from "../../assets/images/register.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const [show, setShow] = useState(true);
@@ -54,6 +55,9 @@ const Register = () => {
 
   return (
     <div className=" bg-[#160938] py-10 flex h-auto items-center">
+      <Helmet>
+        <title>DriveWhey | Register</title>
+      </Helmet>
       <div className=" bg-white shadow-xl max-w-5xl px-10 py-10 mx-auto flex items-center gap-4">
         <div className="w-full">
           <img src={registerImg} alt="" />
