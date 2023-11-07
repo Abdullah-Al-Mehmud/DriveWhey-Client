@@ -1,7 +1,7 @@
-import { useLoaderData } from "react-router-dom";
 import IndividualService from "./IndividualService";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { BsSearch } from "react-icons/bs";
 
 const Services = () => {
   const [showMore, setShowMore] = useState(false);
@@ -41,11 +41,12 @@ const Services = () => {
           <input
             className="w-72 relative rounded-full pl-5 font-bold border-2 border-[#e93f58] focus:border-[#e93f58] outline-none"
             type="text"
+            placeholder="Search here..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button type="submit" className="bg-red-500 absolute text-white">
-            Search
+          <button type="submit" className="-ml-10 mt-3 absolute text-lg ">
+            <BsSearch></BsSearch>
           </button>
         </form>
       </div>

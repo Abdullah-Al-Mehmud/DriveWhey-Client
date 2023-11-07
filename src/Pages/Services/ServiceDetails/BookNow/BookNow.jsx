@@ -2,6 +2,7 @@ import { Modal } from "flowbite-react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const BookNow = ({ serviceDetails }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -38,25 +39,32 @@ const BookNow = ({ serviceDetails }) => {
       serviceDate,
       receiveArea,
     };
-    console.log(booking);
+    // console.log(booking);
 
     // post the booking in backend
-    fetch("http://localhost:3000/bookings", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(booking),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          Swal.fire("WoooW!!", "Service Purchased!", "success");
-          setOpenModal(false);
-        }
-        form.reset();
-      });
+    // fetch("http://localhost:3000/bookings", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(booking),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.insertedId) {
+    //       Swal.fire("WoooW!!", "Service Purchased!", "success");
+    //       setOpenModal(false);
+    //     }
+    //     form.reset();
+    //   });
+    axios.post("http://localhost:3000/bookings", booking).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire("WoooW!!", "Service Purchased!", "success");
+        setOpenModal(false);
+      }
+      form.reset();
+    });
   };
 
   return (

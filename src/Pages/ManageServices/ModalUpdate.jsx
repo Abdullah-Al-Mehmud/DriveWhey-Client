@@ -1,59 +1,40 @@
-import { useContext } from "react";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
-import Swal from "sweetalert2";
-import addServiceImg from "../../assets/images/addService.jpg";
-import { Helmet } from "react-helmet-async";
-import axios from "axios";
+import PropTypes from "prop-types";
 
-const AddService = () => {
-  const { user } = useContext(AuthContext);
+const ModalUpdate = ({ service }) => {
+  const {
+    photo,
+    serviceName,
+    providerName,
+    providerEmail,
+    price,
+    serviceArea,
+    description,
+  } = service;
 
-  const handleAddService = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
 
     const form = e.target;
     const photo = form.photo.value;
     const serviceName = form.serviceName.value;
-    // const name = form.name.value;
-    // const email = form.email.value;
     const price = form.price.value;
     const serviceArea = form.serviceArea.value;
-    const description = form.description.value;
-    const providerImg = user?.photoURL;
-    const providerEmail = user?.email;
-    const providerName = user?.displayName;
+    const serviceDate = form.serviceDate.value;
+    const receiveArea = form.receiveArea.value;
 
-    const service = {
+    const update = {
       photo,
       serviceName,
-      // name,
-      // email,
       price,
       serviceArea,
-      description,
-      providerImg,
-      providerEmail,
-      providerName,
+      serviceDate,
+      receiveArea,
     };
-
-    //  posted data to database
-    axios.post("http://localhost:3000/services", service).then((res) => {
-      if (res.data.insertedId) {
-        Swal.fire("WoooW!!", "Service Added!", "success");
-      }
-      form.reset();
-    });
+    // update data in database
   };
-  console.log(user);
   return (
-    <div className="max-w-7xl mx-auto">
-      <Helmet>
-        <title>DriveWhey | Add Services</title>
-      </Helmet>
-      <form onSubmit={handleAddService} className="md:flex h-2/3 items-center">
-        <div className="w-fit">
-          <img className="lg:w-[800px]" src={addServiceImg} alt="" />
-        </div>
+    <div>
+      <form onSubmit={handleUpdate}>
         <div className="w-full">
           <div className="grid  px-10 py-10  gap-4 mb-6 md:grid-cols-2">
             <div>
@@ -64,6 +45,7 @@ const AddService = () => {
               </label>
               <input
                 type="text"
+                defaultValue={photo}
                 name="photo"
                 id="first_name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -79,6 +61,7 @@ const AddService = () => {
               </label>
               <input
                 type="text"
+                defaultValue={serviceName}
                 name="serviceName"
                 id="last_name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -94,7 +77,7 @@ const AddService = () => {
               </label>
               <input
                 type="text"
-                defaultValue={user?.displayName}
+                defaultValue={providerName}
                 name="name"
                 id="company"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -110,7 +93,7 @@ const AddService = () => {
               </label>
               <input
                 type="text"
-                defaultValue={user?.email}
+                defaultValue={providerEmail}
                 name="email"
                 id="phone"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -126,6 +109,7 @@ const AddService = () => {
               <input
                 type="text"
                 id="website"
+                defaultValue={price}
                 name="price"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Price"
@@ -141,6 +125,7 @@ const AddService = () => {
               <input
                 type="text"
                 name="serviceArea"
+                defaultValue={serviceArea}
                 id="visitors"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Service Area"
@@ -152,7 +137,12 @@ const AddService = () => {
             <label className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">
               Description
             </label>
-            <textarea name="description" required className="w-full h-40" />
+            <textarea
+              defaultValue={description}
+              name="description"
+              required
+              className="w-full h-40"
+            />
           </div>
           <div className=" mb-20 flex justify-center">
             <button className="bg-[#ee3e58] px-20 py-3 rounded-lg font-bold text-white">
@@ -165,4 +155,8 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+ModalUpdate.propTypes = {
+  service: PropTypes.object,
+};
+
+export default ModalUpdate;
