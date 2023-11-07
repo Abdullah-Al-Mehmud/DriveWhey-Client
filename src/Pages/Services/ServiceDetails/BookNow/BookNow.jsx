@@ -1,14 +1,19 @@
 import { Modal } from "flowbite-react";
 import { useState } from "react";
-import { useContext } from "react";
-import { AuthContext } from "../../../../AuthProvider/AuthProvider";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 
 const BookNow = ({ serviceDetails }) => {
   const [openModal, setOpenModal] = useState(false);
-  const { user } = useContext(AuthContext);
-  const { name, price, serviceName, photo, serviceArea } = serviceDetails;
+
+  const {
+    price,
+    serviceName,
+    photo,
+    serviceArea,
+    providerName,
+    providerEmail,
+  } = serviceDetails;
 
   const handleBooking = (e) => {
     e.preventDefault();
@@ -105,7 +110,7 @@ const BookNow = ({ serviceDetails }) => {
                   </label>
                   <input
                     type="text"
-                    defaultValue={user?.displayName ? user?.displayName : name}
+                    defaultValue={providerName}
                     name="name"
                     id="company"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -120,7 +125,7 @@ const BookNow = ({ serviceDetails }) => {
                   </label>
                   <input
                     type="text"
-                    defaultValue={user?.email}
+                    defaultValue={providerEmail}
                     name="email"
                     id="phone"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

@@ -1,13 +1,33 @@
 import { useLoaderData } from "react-router-dom";
 import IndividualService from "./IndividualService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Services = () => {
   const allServices = useLoaderData();
   const [showMore, setShowMore] = useState(false);
+  const [search, setSearch] = useState("");
+  // const [userData, setUserData] = useState([]);
+  // const [filteredData, setFilteredData] = useState("");
 
+  const handleFilterData = () => {
+    allServices.filter((item) => {
+      return search.toLowerCase() === ""
+        ? item
+        : item.serviceName.toLowerCase().includes(search);
+    });
+  };
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
+      <div>
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button className="bg-red-500 text-white" onClick={handleFilterData}>
+          Search
+        </button>
+      </div>
       <div className="grid lg:grid-cols-2 gap-5 px-10 py-20">
         {showMore
           ? allServices.map((service) => (

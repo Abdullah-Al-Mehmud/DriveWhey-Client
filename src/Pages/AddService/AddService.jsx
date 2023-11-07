@@ -17,6 +17,9 @@ const AddService = () => {
     const price = form.price.value;
     const serviceArea = form.serviceArea.value;
     const description = form.description.value;
+    const providerImg = user?.photoURL;
+    const providerEmail = user?.email;
+    const providerName = user?.displayName;
 
     const service = {
       photo,
@@ -26,8 +29,11 @@ const AddService = () => {
       price,
       serviceArea,
       description,
+      providerImg,
+      providerEmail,
+      providerName,
     };
-    console.log(service);
+
     // posting data on database
     fetch("http://localhost:3000/services", {
       method: "POST",
@@ -45,7 +51,7 @@ const AddService = () => {
         form.reset();
       });
   };
-
+  console.log(user);
   return (
     <div className="max-w-7xl mx-auto">
       <form onSubmit={handleAddService} className="md:flex h-2/3 items-center">
