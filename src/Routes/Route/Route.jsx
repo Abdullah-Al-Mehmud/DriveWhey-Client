@@ -9,6 +9,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Services from "../../Pages/Services/Services";
 import ServiceDetails from "../../Pages/Services/ServiceDetails/ServiceDetails";
 import ManageServices from "../../Pages/ManageServices/ManageServices";
+import ModalUpdate from "../../Pages/ManageServices/ModalUpdate";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,12 @@ const router = createBrowserRouter([
             <ManageServices></ManageServices>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/updateService/:id",
+        element: <ModalUpdate></ModalUpdate>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/services/${params.id}`),
       },
     ],
   },

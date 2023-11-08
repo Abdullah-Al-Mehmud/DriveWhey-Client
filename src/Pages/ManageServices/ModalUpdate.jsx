@@ -1,10 +1,16 @@
 import axios from "axios";
 import PropTypes from "prop-types";
+// import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+// import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useLoaderData } from "react-router-dom";
 
-const ModalUpdate = ({ service }) => {
+const ModalUpdate = () => {
   const navigate = useNavigate();
+  const serviceUpdate = useLoaderData();
+  console.log(serviceUpdate);
+  // const { user } = useContext(AuthContext);
   const {
     _id,
     photo,
@@ -12,9 +18,9 @@ const ModalUpdate = ({ service }) => {
     providerName,
     providerEmail,
     price,
-    serviceArea,
     description,
-  } = service;
+    serviceArea,
+  } = serviceUpdate;
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -39,9 +45,9 @@ const ModalUpdate = ({ service }) => {
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount === 1) {
-          Swal.fire("WoooW!!", "Service Purchased!", "success");
-          navigate("/manageServices");
+          Swal.fire("WoooW!!", "Service Updated!", "success");
         }
+        navigate("/manageServices");
         form.reset();
       });
   };
@@ -49,7 +55,7 @@ const ModalUpdate = ({ service }) => {
     <div>
       <form onSubmit={handleUpdate}>
         <div className="w-full">
-          <div className="grid  px-10 py-10  gap-4 mb-6 md:grid-cols-2">
+          <div className="grid px-10 py-10  gap-4 mb-6 md:grid-cols-2">
             <div>
               <label
                 htmlFor="first_name"
@@ -58,12 +64,12 @@ const ModalUpdate = ({ service }) => {
               </label>
               <input
                 type="text"
-                defaultValue={photo}
                 name="photo"
                 id="first_name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Picture URL"
                 required
+                defaultValue={photo}
               />
             </div>
             <div>
@@ -164,6 +170,7 @@ const ModalUpdate = ({ service }) => {
           </div>
         </div>
       </form>
+      ;
     </div>
   );
 };
