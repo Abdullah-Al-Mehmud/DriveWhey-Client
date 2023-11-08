@@ -42,7 +42,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/services/${params.id}`),
+          fetch(
+            `https://assignment-11-ride-share-server.vercel.app/services/${params.id}`
+          ),
       },
       {
         path: "/manageServices",
@@ -60,11 +62,17 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/services/${params.id}`),
+          fetch(
+            `https://assignment-11-ride-share-server.vercel.app/services/${params.id}`
+          ),
       },
       {
         path: "/mySchedules",
-        element: <MySchedules></MySchedules>,
+        element: (
+          <PrivateRoute>
+            <MySchedules></MySchedules>
+          </PrivateRoute>
+        ),
       },
     ],
   },

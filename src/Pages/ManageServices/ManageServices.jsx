@@ -10,10 +10,13 @@ import { Helmet } from "react-helmet-async";
 const ManageServices = () => {
   const { user } = useContext(AuthContext);
   const [services, setServices] = useState([]);
+  console.log(services);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/services?email=${user?.email}`)
+      .get(
+        `https://assignment-11-ride-share-server.vercel.app/services?email=${user?.email}`
+      )
       .then((res) => {
         setServices(res.data);
       });
@@ -31,7 +34,9 @@ const ManageServices = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/services/delete/${id}`)
+          .delete(
+            `https://assignment-11-ride-share-server.vercel.app/services/delete/${id}`
+          )
           .then((res) => {
             if (res.data.deletedCount === 1) {
               Swal.fire({
@@ -53,6 +58,7 @@ const ManageServices = () => {
       <Helmet>
         <title>DriveWhey | Manage Services</title>
       </Helmet>
+
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

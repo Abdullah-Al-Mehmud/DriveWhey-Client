@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import Bookings from "./Bookings/Bookings";
 
 const MySchedules = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/bookings?email${user?.email}`)
+      .get(
+        `https://assignment-11-ride-share-server.vercel.app/bookings?email${user?.email}`
+      )
       .then((res) => {
         setBookings(res.data);
       });
@@ -28,6 +29,7 @@ const MySchedules = () => {
               <th className="font-bold text-lg">Services</th>
               <th className="font-bold text-lg">Service Date</th>
               <th className="font-bold text-lg">Price</th>
+              <th className="font-bold text-lg">Service Area</th>
               <th></th>
             </tr>
           </thead>
@@ -50,9 +52,6 @@ const MySchedules = () => {
                     </div>
                     <div>
                       <div className="font-bold">{booking?.serviceName}</div>
-                      <div className="text-sm opacity-50">
-                        {/* {service?.providerEmail} */}
-                      </div>
                     </div>
                   </div>
                 </td>
@@ -61,6 +60,7 @@ const MySchedules = () => {
                   <br />
                 </td>
                 <td>{booking?.price} $</td>
+                <td>{booking?.serviceArea} </td>
                 <th>
                   {/* <Link to={`/updateService/${service._id}`}>
                     <button className="text-green-500 cursor-pointer text-lg">
