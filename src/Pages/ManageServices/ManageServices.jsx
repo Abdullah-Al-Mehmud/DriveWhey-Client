@@ -5,6 +5,7 @@ import axios from "axios";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageServices = () => {
   const { user } = useContext(AuthContext);
@@ -49,6 +50,9 @@ const ManageServices = () => {
   };
   return (
     <div className="mb-20">
+      <Helmet>
+        <title>DriveWhey | Manage Services</title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -100,33 +104,6 @@ const ManageServices = () => {
                       Edit
                     </button>
                   </Link>
-                  {/* <ModalUpdate service={service}></ModalUpdate> */}
-
-                  {/* <dialog
-                    id={`my_modal_${service?._id}`}
-                    className="modal modal-bottom sm:modal-middle">
-                    <div className="modal-box">
-                     
-
-                      <p className="py-4">
-                        Press ESC key or click the button below to close
-                      </p>
-                      <div className="modal-action">
-                        <form method="dialog">
-                          <button className="btn">Close</button>
-                        </form>
-                      </div>
-                    </div>
-                  </dialog> */}
-                  {/*  */}
-                  {/* <dialog id={`my_modal_${service?._id}`} className="modal">
-                    <div className="modal-box">
-                      <ModalUpdate service={service}></ModalUpdate>
-                    </div>
-                    <form method="dialog" className="modal-backdrop">
-                      <button>close</button>
-                    </form>
-                  </dialog> */}
                 </th>
               </tr>
             ))}

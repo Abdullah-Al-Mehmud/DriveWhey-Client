@@ -10,6 +10,7 @@ import Services from "../../Pages/Services/Services";
 import ServiceDetails from "../../Pages/Services/ServiceDetails/ServiceDetails";
 import ManageServices from "../../Pages/ManageServices/ManageServices";
 import ModalUpdate from "../../Pages/ManageServices/ModalUpdate";
+import MySchedules from "../../Pages/MySchedules/MySchedules";
 
 const router = createBrowserRouter([
   {
@@ -53,9 +54,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/updateService/:id",
-        element: <ModalUpdate></ModalUpdate>,
+        element: (
+          <PrivateRoute>
+            <ModalUpdate></ModalUpdate>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:3000/services/${params.id}`),
+      },
+      {
+        path: "/mySchedules",
+        element: <MySchedules></MySchedules>,
       },
     ],
   },

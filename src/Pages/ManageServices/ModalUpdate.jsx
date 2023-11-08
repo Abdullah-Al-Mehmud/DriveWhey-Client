@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 // import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { useLoaderData } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const ModalUpdate = () => {
   const navigate = useNavigate();
@@ -53,6 +54,9 @@ const ModalUpdate = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>DriveWhey | Update Services</title>
+      </Helmet>
       <form onSubmit={handleUpdate}>
         <div className="w-full">
           <div className="grid px-10 py-10  gap-4 mb-6 md:grid-cols-2">

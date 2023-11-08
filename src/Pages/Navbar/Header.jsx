@@ -37,6 +37,11 @@ const Header = () => {
               Manage Services
             </Dropdown.Item>
           </Link>
+          <Link to="/mySchedules">
+            <Dropdown.Item className="font-bold text-[#ed2845]">
+              My Schedules
+            </Dropdown.Item>
+          </Link>
         </Dropdown>
       ) : (
         ""

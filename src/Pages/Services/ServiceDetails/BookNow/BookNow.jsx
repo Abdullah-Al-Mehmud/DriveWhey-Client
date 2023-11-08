@@ -39,25 +39,7 @@ const BookNow = ({ serviceDetails }) => {
       serviceDate,
       receiveArea,
     };
-    // console.log(booking);
 
-    // post the booking in backend
-    // fetch("http://localhost:3000/bookings", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(booking),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data.insertedId) {
-    //       Swal.fire("WoooW!!", "Service Purchased!", "success");
-    //       setOpenModal(false);
-    //     }
-    //     form.reset();
-    //   });
     axios.post("http://localhost:3000/bookings", booking).then((res) => {
       if (res.data.insertedId) {
         Swal.fire("WoooW!!", "Service Purchased!", "success");
