@@ -1,5 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import reviewImg from "../../../assets/images/review.png";
 
 const AddReview = () => {
   const handleAddReview = (e) => {
@@ -22,16 +23,20 @@ const AddReview = () => {
     console.log(review);
 
     // add the review to backend
-    axios.post("http://localhost:3000/review", review).then((res) => {
-      if (res.data.insertedId) {
-        Swal.fire("WoooW!!", "Review Added!", "success");
-      }
-      form.reset();
-    });
+    axios
+      .post("https://assignment-11-ride-share-server.vercel.app/review", review)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire("WoooW!!", "Review Added!", "success");
+        }
+        form.reset();
+      });
   };
   return (
-    <div className="flex">
-      <div className="w-full"></div>
+    <div className="md:flex items-center max-w-7xl mx-auto">
+      <div className="w-full">
+        <img src={reviewImg} alt="" />
+      </div>
       <div className="w-full">
         <form onSubmit={handleAddReview}>
           <div className="w-full">

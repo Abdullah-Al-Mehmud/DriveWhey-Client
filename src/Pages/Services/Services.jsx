@@ -24,7 +24,7 @@ const Services = () => {
     setDisplay(filterData);
   };
   useEffect(() => {
-    fetch("http://localhost:3000/services")
+    fetch("https://assignment-11-ride-share-server.vercel.app/services")
       .then((res) => res.json())
       .then((data) => {
         setDisplay(data);

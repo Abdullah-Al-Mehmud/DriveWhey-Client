@@ -42,7 +42,10 @@ const ModalUpdate = () => {
     };
     // update data in database
     axios
-      .put(`http://localhost:3000/services/update/${_id}`, update)
+      .put(
+        `https://assignment-11-ride-share-server.vercel.app/services/update/${_id}`,
+        update
+      )
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount === 1) {

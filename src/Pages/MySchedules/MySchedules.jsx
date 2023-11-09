@@ -8,7 +8,9 @@ const MySchedules = () => {
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/bookings?bookingEmail=${user?.email}`)
+      .get(
+        `https://assignment-11-ride-share-server.vercel.app/bookings?bookingEmail=${user?.email}`
+      )
       .then((res) => {
         setBookings(res.data);
       });

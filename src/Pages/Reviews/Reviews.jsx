@@ -4,7 +4,7 @@ import { useLoaderData } from "react-router-dom";
 const Reviews = () => {
   const review = useLoaderData();
   return (
-    <div className="max-w-7xl mx-auto px-36">
+    <div className="max-w-7xl mx-auto lg:px-36 px-20">
       <Timeline>
         {review.map((review) => (
           <Timeline.Item key={review?._id}>

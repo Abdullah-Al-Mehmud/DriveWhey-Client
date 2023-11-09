@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 
 const Faq = () => {
   return (
-    <div className="flex items-center max-w-6xl mx-auto">
+    <div className="md:flex items-center max-w-6xl mx-auto">
       <div className="w-full">
         <Accordion collapseAll>
           <Accordion.Panel>

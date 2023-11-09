@@ -44,13 +44,18 @@ const BookNow = ({ serviceDetails }) => {
       bookingEmail,
     };
 
-    axios.post("http://localhost:3000/bookings", booking).then((res) => {
-      if (res.data.insertedId) {
-        Swal.fire("WoooW!!", "Service Purchased!", "success");
-        setOpenModal(false);
-      }
-      form.reset();
-    });
+    axios
+      .post(
+        "https://assignment-11-ride-share-server.vercel.app/bookings",
+        booking
+      )
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire("WoooW!!", "Service Purchased!", "success");
+          setOpenModal(false);
+        }
+        form.reset();
+      });
   };
 
   return (

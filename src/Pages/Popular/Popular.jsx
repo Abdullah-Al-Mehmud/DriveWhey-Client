@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 const Popular = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:3000/services").then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get("https://assignment-11-ride-share-server.vercel.app/services")
+      .then((res) => {
+        setData(res.data);
+      });
   }, []);
   return (
     <div className="max-w-5xl mx-auto">
