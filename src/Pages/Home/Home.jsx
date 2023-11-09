@@ -3,6 +3,7 @@ import Hero from "../Hero/Hero";
 import AboutUs from "./AboutUs/AboutUs";
 import Faq from "./FAQ/Faq";
 import Popular from "../Popular/Popular";
+import AddReview from "./AddReview/AddReview";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <AboutUs></AboutUs>
       <Popular></Popular>
       <Faq></Faq>
+      <AddReview></AddReview>
     </div>
   );
 };

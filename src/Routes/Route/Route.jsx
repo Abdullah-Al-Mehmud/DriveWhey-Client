@@ -11,6 +11,7 @@ import ServiceDetails from "../../Pages/Services/ServiceDetails/ServiceDetails";
 import ManageServices from "../../Pages/ManageServices/ManageServices";
 import ModalUpdate from "../../Pages/ManageServices/ModalUpdate";
 import MySchedules from "../../Pages/MySchedules/MySchedules";
+import Reviews from "../../Pages/Reviews/Reviews";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,11 @@ const router = createBrowserRouter([
             <MySchedules></MySchedules>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/reviews",
+        element: <Reviews></Reviews>,
+        loader: () => fetch("http://localhost:3000/review"),
       },
     ],
   },

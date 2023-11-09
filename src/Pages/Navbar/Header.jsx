@@ -54,6 +54,13 @@ const Header = () => {
           Services
         </Link>
       </li>
+      <li>
+        <Link
+          to="/reviews"
+          className="block py-2 pl-3 pr-4 font-bold  rounded md:hover:bg-transparent md:hover:text-[#ed2845] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+          Reviews
+        </Link>
+      </li>
     </>
   );
 
