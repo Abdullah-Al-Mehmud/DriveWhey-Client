@@ -1,10 +1,12 @@
 import { Modal } from "flowbite-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { AuthContext } from "../../../../AuthProvider/AuthProvider";
 
 const BookNow = ({ serviceDetails }) => {
+  const { user } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
 
   const {
@@ -28,6 +30,7 @@ const BookNow = ({ serviceDetails }) => {
     const serviceArea = form.serviceArea.value;
     const serviceDate = form.serviceDate.value;
     const receiveArea = form.receiveArea.value;
+    const bookingEmail = user?.email;
 
     const booking = {
       photo,
@@ -38,20 +41,16 @@ const BookNow = ({ serviceDetails }) => {
       serviceArea,
       serviceDate,
       receiveArea,
+      bookingEmail,
     };
 
-    axios
-      .post(
-        "https://assignment-11-ride-share-server.vercel.app/bookings",
-        booking
-      )
-      .then((res) => {
-        if (res.data.insertedId) {
-          Swal.fire("WoooW!!", "Service Purchased!", "success");
-          setOpenModal(false);
-        }
-        form.reset();
-      });
+    axios.post("http://localhost:3000/bookings", booking).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire("WoooW!!", "Service Purchased!", "success");
+        setOpenModal(false);
+      }
+      form.reset();
+    });
   };
 
   return (

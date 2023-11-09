@@ -37,17 +37,12 @@ const AddService = () => {
     };
 
     //  posted data to database
-    axios
-      .post(
-        "https://assignment-11-ride-share-server.vercel.app/services",
-        service
-      )
-      .then((res) => {
-        if (res.data.insertedId) {
-          Swal.fire("WoooW!!", "Service Added!", "success");
-        }
-        form.reset();
-      });
+    axios.post("http://localhost:3000/services", service).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire("WoooW!!", "Service Added!", "success");
+      }
+      form.reset();
+    });
   };
   console.log(user);
   return (

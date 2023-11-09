@@ -28,7 +28,7 @@ const Register = () => {
     };
 
     // sending
-    fetch("https://assignment-11-ride-share-server.vercel.app/users", {
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

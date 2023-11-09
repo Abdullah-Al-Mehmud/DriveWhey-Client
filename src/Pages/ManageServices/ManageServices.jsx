@@ -14,9 +14,7 @@ const ManageServices = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://assignment-11-ride-share-server.vercel.app/services?email=${user?.email}`
-      )
+      .get(`http://localhost:3000/services?email=${user?.email}`)
       .then((res) => {
         setServices(res.data);
       });
@@ -34,9 +32,7 @@ const ManageServices = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(
-            `https://assignment-11-ride-share-server.vercel.app/services/delete/${id}`
-          )
+          .delete(`http://localhost:3000/services/delete/${id}`)
           .then((res) => {
             if (res.data.deletedCount === 1) {
               Swal.fire({

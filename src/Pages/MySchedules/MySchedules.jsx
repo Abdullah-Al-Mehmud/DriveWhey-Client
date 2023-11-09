@@ -4,16 +4,15 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const MySchedules = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const [bookings, setBookings] = useState([]);
   useEffect(() => {
     axios
-      .get(
-        `https://assignment-11-ride-share-server.vercel.app/bookings?email${user?.email}`
-      )
+      .get(`http://localhost:3000/bookings?bookingEmail=${user?.email}`)
       .then((res) => {
         setBookings(res.data);
       });
-  }, [user?.email]);
+  }, [user]);
   return (
     <div>
       <h1 className="text-center font-bold text-6xl">
