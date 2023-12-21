@@ -1,5 +1,6 @@
 import { Timeline } from "flowbite-react";
-
+import "@smastrom/react-rating/style.css";
+import { Rating } from "@smastrom/react-rating";
 import { useLoaderData } from "react-router-dom";
 const Reviews = () => {
   const review = useLoaderData();
@@ -11,6 +12,13 @@ const Reviews = () => {
             <Timeline.Point />
             <Timeline.Content>
               <Timeline.Time>{review?.email}</Timeline.Time>
+              <div className="mt-2">
+                <Rating
+                  style={{ maxWidth: 80 }}
+                  value={review?.ratings}
+                  readOnly
+                />
+              </div>
               <Timeline.Title>
                 <p className="mt-2">{review?.title}</p>
               </Timeline.Title>

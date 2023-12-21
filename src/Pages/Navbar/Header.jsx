@@ -18,7 +18,7 @@ const Header = () => {
       <li>
         <Link
           to="/"
-          className="block py-2 pl-3 pr-4 font-bold  bg-[#ed2845] rounded md:bg-transparent md:text-[#ed2845] md:p-0 md:dark:text-blue-500"
+          className="block py-2 pl-3 pr-4 font-bold text-lg  bg-[#ed2845] rounded md:bg-transparent md:text-[#ed2845] md:p-0 text-white md:dark:text-blue-500"
           aria-current="page">
           Home
         </Link>
@@ -26,19 +26,19 @@ const Header = () => {
       {/* dropdown */}
 
       {user ? (
-        <Dropdown className="w-fit px-5 text-start" label="Dashboard" inline>
+        <Dropdown className="w-fit px-5  text-start" label="Dashboard" inline>
           <Link to="/addServices">
-            <Dropdown.Item className="font-bold text-[#ed2845]">
+            <Dropdown.Item className="font-bold text-lg text-[#ed2845]">
               Add Services
             </Dropdown.Item>
           </Link>
           <Link to="/manageServices">
-            <Dropdown.Item className="font-bold text-[#ed2845]">
+            <Dropdown.Item className="font-bold text-lg text-[#ed2845]">
               Manage Services
             </Dropdown.Item>
           </Link>
           <Link to="/mySchedules">
-            <Dropdown.Item className="font-bold text-[#ed2845]">
+            <Dropdown.Item className="font-bold text-lg text-[#ed2845]">
               My Schedules
             </Dropdown.Item>
           </Link>
@@ -50,14 +50,14 @@ const Header = () => {
       <li>
         <Link
           to="/services"
-          className="block py-2 pl-3 pr-4 font-bold  rounded md:hover:bg-transparent md:hover:text-[#ed2845] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+          className="block text-lg  py-2 pl-3 pr-4 font-bold  rounded md:hover:bg-transparent md:hover:text-[#ed2845] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
           Services
         </Link>
       </li>
       <li>
         <Link
           to="/reviews"
-          className="block py-2 pl-3 pr-4 font-bold  rounded md:hover:bg-transparent md:hover:text-[#ed2845] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+          className="block text-lg py-2 pl-3 pr-4 font-bold  rounded md:hover:bg-transparent md:hover:text-[#ed2845] md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
           Reviews
         </Link>
       </li>
@@ -71,7 +71,9 @@ const Header = () => {
     <div className="max-w-6xl mx-auto">
       <Navbar fluid rounded>
         <Navbar.Brand>
-          <img src={logo} className="w-28 mr-3" />
+          <Link to="/">
+            <img src={logo} className="w-28 mr-3" />
+          </Link>
         </Navbar.Brand>
         <div className="flex md:order-2">
           {/* profile */}
@@ -95,7 +97,7 @@ const Header = () => {
                     </span>
                   </Dropdown.Header>
 
-                  <Link>
+                  <Link to="/profile">
                     <Dropdown.Item className="font-bold">
                       Visit Profile
                     </Dropdown.Item>

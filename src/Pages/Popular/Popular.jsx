@@ -13,21 +13,26 @@ const Popular = () => {
       });
   }, []);
   return (
-    <div className="max-w-5xl mx-auto">
-      <div className="grid md:grid-cols-2 gap-5">
-        {data.slice(0, 4).map((item) => (
-          <SinglePopular key={item._id} item={item}></SinglePopular>
-        ))}
-      </div>
+    <>
+      <h1 className="text-5xl text-center my-10 font-bold">
+        <span className="text-[#ed1e3d] ">Popular</span> Services
+      </h1>
+      <div className="max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-5">
+          {data.slice(0, 4).map((item) => (
+            <SinglePopular key={item._id} item={item}></SinglePopular>
+          ))}
+        </div>
 
-      <div className="flex justify-center mt-10">
-        <Link to="/services">
-          <button className="mt-5 shadow-xl px-6 py-3 bg-[#ed1e3d] text-white font-bold rounded-t-xl rounded-bl-xl md:mb-20">
-            Show All
-          </button>
-        </Link>
+        <div className="flex justify-center mt-10">
+          <Link to="/services">
+            <button className="mt-5 shadow-xl px-6 py-3 bg-[#ed1e3d] text-white font-bold rounded-t-xl rounded-bl-xl md:mb-20">
+              Show All
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

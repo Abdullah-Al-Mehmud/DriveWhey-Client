@@ -1,5 +1,6 @@
 import heroImg from "../../assets/images/hero.jpg";
 import { Typewriter } from "react-simple-typewriter";
+
 const Hero = () => {
   return (
     <div className="max-w-6xl mx-auto">
@@ -18,6 +19,7 @@ const Hero = () => {
                 delaySpeed={1000}
               />
             </h1>
+
             <p className="mt-4 pr-20 font-bold ">
               Ride-sharing involves individuals sharing a ride in a single
               vehicle, often with people who are headed in the same general

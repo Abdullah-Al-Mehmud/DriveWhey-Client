@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import googleImg from "../../assets/icons/google.png";
 import { Helmet } from "react-helmet-async";
+import { BsSearch } from "react-icons/bs";
 const Login = () => {
   const [show, setShow] = useState(true);
   const { loginUser, googleAuth } = useContext(AuthContext);
@@ -44,7 +45,7 @@ const Login = () => {
       <Helmet>
         <title>DriveWhey | Login</title>
       </Helmet>
-      <div className=" bg-white shadow-xl max-w-5xl px-10 py-10 mx-auto flex items-center gap-4">
+      <div className=" bg-white shadow-xl max-w-5xl px-10 py-10 mx-auto md:flex items-center gap-4">
         <div className="w-full">
           <img src={loginImg} alt="" />
         </div>
@@ -64,7 +65,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#e93f58] focus:border-[#e93f58] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white font-bold"
+                  className="w-72 relative rounded-full pl-5 font-bold border-2 border-[#e93f58] focus:border-[#e93f58] outline-none"
                   placeholder="name@company.com"
                   required=""
                 />
@@ -75,23 +76,25 @@ const Login = () => {
                   className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">
                   Your password
                 </label>
+
                 <input
+                  className="w-72 relative rounded-full pl-5 font-bold border-2 border-[#e93f58] focus:border-[#e93f58] outline-none"
                   type={show ? "password" : "text"}
                   name="password"
                   id="password"
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#e93f58] focus:border-[#e93f58] block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white font-bold relative"
-                  required=""
                 />
-                <div
+
+                <button
                   onClick={() => setShow(!show)}
-                  className="absolute cursor-pointer ml-72 -mt-7">
+                  type="submit"
+                  className="-ml-10 mt-3 absolute text-lg ">
                   {show ? (
                     <BiSolidHide></BiSolidHide>
                   ) : (
                     <BiSolidShow></BiSolidShow>
                   )}
-                </div>
+                </button>
               </div>
               <div className="flex items-start">
                 <div className="flex items-start">
@@ -126,7 +129,7 @@ const Login = () => {
               </div>
               {/* google login */}
               <div>
-                <p className="text-center font-bold">Also Register With</p>
+                <p className="text-center font-bold">Also Login With</p>
                 <div className="flex mt-4 justify-center">
                   <img
                     onClick={handleGoogleRegister}

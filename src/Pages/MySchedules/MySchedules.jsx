@@ -15,13 +15,15 @@ const MySchedules = () => {
         setBookings(res.data);
       });
   }, [user]);
+
+  console.log(bookings);
   return (
     <div>
       <h1 className="text-center font-bold text-6xl">
         You Have Booked{" "}
         <span className="text-[#ed1e3d] py-5"> {bookings.length}</span> Items
       </h1>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto max-w-6xl mx-auto">
         <table className="table">
           {/* head */}
           <thead>
@@ -39,7 +41,7 @@ const MySchedules = () => {
               // <Bookings key={booking._id} booking={booking}></Bookings>
               <tr key={booking?._id}>
                 <th>
-                  <button className="btn ml-5 text-red-600 btn-circle btn-outline"></button>
+                  {/* <button className="btn ml-5 text-red-600 btn-circle btn-outline"></button> */}
                 </th>
                 <td>
                   <div className="flex items-center space-x-3">
